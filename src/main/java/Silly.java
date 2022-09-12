@@ -80,8 +80,17 @@ public class Silly implements Comparable<Silly>{
      *       Make sure you document this method!
      */
 
-
-
+    /**
+     * Creates a new Silly object.
+     * This constructor takes in two String instances as arguments and
+     * concatenates them to form the name.
+     *
+     * @param first_string     a first string for this Silly instance's name.
+     * @param second_string    a second string for this Silly instance's name.
+     */
+    public Silly(String first_string, String second_string) {
+        this.name = first_string + second_string;
+    }
 
 
     public static void main(String[] args) {
@@ -116,7 +125,7 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
@@ -134,6 +143,7 @@ public class Silly implements Comparable<Silly>{
     @Override
     public String toString(){
         // TODO (Task 3): Implement the body of this method!
+        return this.name;
     }
 
     /**
@@ -161,6 +171,23 @@ public class Silly implements Comparable<Silly>{
 
         // Hint: to compare strings, we need to use .equals()
         //       e.g. s1.equals(s2)
+
+        // Start by ensuring that both strings are not null before trying to compare them
+        // If both names are null, then return true since the names are technically equal
+        if (this.name == null && other.name == null) {
+            return true;
+
+        // Else, if this instance's name is null and the other name is not, return false
+        } else if (this.name == null && other.name != null) {
+            return false;
+
+        // Else, the past 2 cases checked if this instance's name is null, so we now
+        // know this instance's name is not null; we can call this name's equals
+        // method to finally check if the names are equal
+        } else {
+            return this.name.equals(other.name);
+        }
+
     }
 
     /**
@@ -194,6 +221,7 @@ public class Silly implements Comparable<Silly>{
          *                You can get the length of a string by using the
          *                .length() method.
          */
+        return this.name.length() - other.name.length();
     }
 
     /*
